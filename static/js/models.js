@@ -138,3 +138,11 @@ function getUserStub(i) {
     newUser.set('household_id', 1);
     return newUser;
 }
+
+function longpoll() {
+    $.get('/longpoll', function (res) {
+        console.log(res);
+    }, function (err) {
+        longpoll();
+    });
+}

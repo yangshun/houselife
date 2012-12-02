@@ -10,6 +10,8 @@ from blueprints import PARSE_BASE_API, PARSE_HEADERS
 from common.auth import login_required, set_session_key, remove_session_key
 from common import TASK_STATUS_OPEN, TASK_STATUS_COMPLETED
 
+from app import realtime
+
 log = logging.getLogger(__name__)
 
 mod = Blueprint('task', __name__)
@@ -47,6 +49,8 @@ def create():
         log.info("Task created successfully.")
         jtask = r.json
         log.debug(json.dumps(jtask))
+
+    realtime.add_message(jtask)
         
     return Response(json.dumps(jtask), mimetype="application/json")
     

@@ -60,7 +60,12 @@ table select {
     height: 20px;
 }
 
-#todo-container {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+table tr th {
+    background: black !important;
+    color: white !important;
+}
+
+#todo-container table {
+    font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif !important;
     font-size: 12px !important;
 }

@@ -24,8 +24,6 @@ function renderGraph(el) {
         }
     }
 
-    console.log(filteredData);
-    console.log(dictCount);
 
     var dataTable = [];
     dataTable.push(['User', 'Tasks Done']);
@@ -33,16 +31,35 @@ function renderGraph(el) {
         dataTable.push([k,dictCount[k]]);
     }
 
-    console.log(dataTable);
 
     var data = google.visualization.arrayToDataTable(dataTable);
 
     var options = {
-      title: 'Task Distribution'
+      title: 'Task Distribution',
+      backgroundColor: undefined
     };
     var chart = new google.visualization.PieChart(el);
     chart.draw(data, options);
+    $($('rect')[0]).attr('fill','none');
     taskCollection.off('reset', renderGraph);
+}
+
+
+function renderTime(thisView) {
+/*    if (user.objectId) {
+        var user = new User(user.objectId);
+    }
+    var myTasks = taskCollection.models.filter(function (task) {
+        //return (task.get('assignee_id') == user.get('objectId'));
+    });
+
+    times = [];
+    for (var i = 0; i < myTasks.length; i++) {
+        times.push(new Date(myTasks.get('updated_at')));
+    }
+
+    console.log(times);
+*/
 }
 
 $(function () {
@@ -75,7 +92,7 @@ $(function () {
             $('#nav-analytics').click(function (e) {
                 e.preventDefault();
                 thisApp.navigate('dashboard/analytics', {trigger:true});
-                renderGraph(thisView.$el.find('#distribution-graph')[0]);
+                renderGraph(views['analytics'].$el.find('#distribution-graph')[0]);
             });
 
             $('#nav-expenses').click(function(e) {
@@ -125,6 +142,10 @@ $(function () {
                 collection: taskCollection
             });
 
+            deletedTaskCollectionView = new DeletedTaskCollectionView({
+                collection: taskCollection
+            });
+
             taskCollection.grab(function () {
                 $('#add-task-btn').click(function () {
                     $( "#dialog-modal" ).dialog({
@@ -136,6 +157,8 @@ $(function () {
             }, false);
             $('#tasks-container').append(taskCollectionView.$el);
             $('#completed-tasks-container').append(completedTaskCollectionView.$el);
+            $('#deleted-tasks-container').append(deletedTaskCollectionView.$el);
+
 
 
         }
@@ -163,12 +186,12 @@ $(function () {
                 if (taskCollection.length === 0) {
                     taskCollection.on('reset', function () {
                         renderGraph(thisView.$el.find('#distribution-graph')[0]);
+                        renderTime(thisView);
                     });
                 } else {
                     renderGraph(this.el);
+                    renderTime(thisView);
                 }
-
-
             }
         }
     });

@@ -94,8 +94,8 @@
                      animations:^{
                          map.alpha = 1.0f;
                      } completion:^(BOOL finished){
-                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PayPal Office nearby"
-                                                                         message:@"Pick up Chenyang from PayPal Office."
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"MacDonalds nearby"
+                                                                         message:@"You may want to pick up dinner from the MacDonalds nearby."
                                                                         delegate:self
                                                                cancelButtonTitle:@"Okay" otherButtonTitles: nil];
                          [alert show];
@@ -133,7 +133,7 @@
     switch (placeEvent.eventType)
     {
         case QLPlaceEventTypeAt:
-            placeTitle = [NSString stringWithFormat:@"Near %@", placeEvent.place.name];
+            placeTitle = [NSString stringWithFormat:@"Nearby %@", placeEvent.place.name];
             break;
         case QLPlaceEventTypeLeft:
             placeTitle = [NSString stringWithFormat:@"Left %@", placeEvent.place.name];

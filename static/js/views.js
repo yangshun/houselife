@@ -33,7 +33,7 @@ $(function () {
             var $titleEntry = $('<td>');
             $titleEntry.html(this.model.get('title'));
             
-            var $assigneeEntry = $('<td>');
+            var $assigneeEntry = $('<td style="text-align:center;">');
             var user = appVars.household.find(
                 function (user) {
                     return user.get('objectId') == thisView.model.get('assignee_id');
@@ -41,7 +41,7 @@ $(function () {
             );
 
             if (user) {
-                $assigneeEntry.html(user.get('username'));
+                $assigneeEntry.html('<img style="height:30px; width:30px;" src="/static/img/thumb/'+user.get('username')+'.png" />');
             }
 
             var $editEntry = $('<td>');
@@ -145,7 +145,7 @@ $(function () {
             var $saveEntry = $('<td>');
             var $saveButton = $('<i class="icon-file icon-gray pointer"></i>');
             $saveButton.click(function () {
-                thisView.renderNormalView();
+                thisView.renderNormalView(true, true, true);
                 thisView.model.save({
                     success: function () {
                         alert("save success!");
@@ -163,9 +163,9 @@ $(function () {
                 .append($titleEntry)
                 .append($descriptionEntry)
                 .append($assigneeEntry)
+                .append($emptyEntry)
                 .append($saveEntry)
-                .append($deleteEntry)
-                .append($emptyEntry);
+                .append($deleteEntry);
 
             this.$el.replaceWith($tableRow);
             this.setElement($tableRow);
@@ -179,6 +179,17 @@ $(function () {
             var thisView = this;
             if (this.model instanceof Task) {
                 if (this.model.get('status') == 1) {
+                    this.renderNormalView(false,false,false);
+                }
+            }
+        }
+    });
+
+    DeletedTaskView = TaskView.extend({
+        initialize: function () {
+            var thisView = this;
+            if (this.model instanceof Task) {
+                if (this.model.get('status') == 2) {
                     this.renderNormalView(false,false,false);
                 }
             }
@@ -229,7 +240,7 @@ $(function () {
             var $tableRow = $('<tr>');
             $table.append($tableRow);
 
-            var headers = ["Title", "Description", "Assignee", " ", " ", " "];
+            var headers = ["Title", "Description", "<center>Assignee</center>", " ", " ", " "];
 
             for (var i = 0; i < headers.length; i++) {
                 $tableRow.append($('<th>'+headers[i]+'</th>'));
@@ -244,6 +255,11 @@ $(function () {
     CompletedTaskCollectionView = TaskCollectionView.extend({
         collection: TaskCollection,
         subView: CompletedTaskView
+    });
+
+    DeletedTaskCollectionView = TaskCollectionView.extend({
+        collection: TaskCollection,
+        subView: DeletedTaskView
     });
 
 
