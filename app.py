@@ -31,12 +31,10 @@ def dashboard():
     return render_template('main.html')
 
 def attach_blueprints_to_app():
-    pass
-    """
-    from blueprints import user
-    app.register_blueprint(user.mod, url_prefix='/%s' % engagement.mod.name)
-    """
+    app.register_blueprint(user.mod, url_prefix='/%s' % user.mod.name)
+
 if __name__ == '__main__':
     attach_blueprints_to_app()
-
+    
+    app.secret_key = "|D\xd1s/\x98\xdb\xed\x89Mz\xae\x88\xfdx<\rx\xa7`%\x9c\xd3\x89"
     app.run(host=HOST, port=PORT, debug=DEBUG_MODE)
