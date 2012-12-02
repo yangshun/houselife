@@ -1,6 +1,7 @@
 $(function () {
 
     appVars = {};
+    Backbone.emulateHTTP = true;
 
     var App = Backbone.Router.extend({
         initialize: function () {
@@ -81,13 +82,13 @@ $(function () {
             });
 
             taskCollection.grab(function () {
-                    $('#add-task-btn').click(function () {
+                console.log('grabbed');
+                $('#add-task-btn').click(function () {
                     var newTask = new Task();
                     taskCollection.add(newTask);
                     taskCollectionView.taskViews[newTask.cid].renderEditView();
                 });
             }, false);
-
             $('#tasks-container').append(taskCollectionView.$el);
 
 

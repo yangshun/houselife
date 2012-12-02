@@ -29,7 +29,7 @@ def create():
     if not household_id:
         res = {"code":requests.codes.bad_request,
                "message":"No household ID."}
-        return jsonfiy(res)
+        return jsonify(res)
 
     url = os.path.join(PARSE_BASE_API, "classes/task")
     
@@ -45,7 +45,7 @@ def create():
         jtask = r.json
         log.debug(json.dumps(jtask))
         
-    return jsonfiy(jtask)
+    return jsonify(jtask)
     
 @mod.route("/<task_id>s/delete", methods=["POST"])
 @login_required
@@ -54,7 +54,7 @@ def delete(task_id):
     if not task_id:
         res = {"code":requests.codes.bad_request,
                "message":"No task ID."}
-        return jsonfiy(res)
+        return jsonify(res)
 
     url = os.path.join(PARSE_BASE_API, "classes/task", task_id)
 
@@ -68,7 +68,7 @@ def delete(task_id):
         log.info("Task deleted successfully.")
         res = {"code":r.status_code, "message": "Task deleted successfully."}
     
-    return jsonfiy(res)
+    return jsonify(res)
 
 @mod.route("/<task_id>", methods=["POST"])
 @login_required
@@ -77,7 +77,7 @@ def edit(task_id):
     if not task_id:
         res = {"code":requests.codes.bad_request,
                "message":"No task ID."}
-        return jsonfiy(res)
+        return jsonify(res)
     
     description = request.form.get("description", "")
     title = request.form.get("title", "")
@@ -101,4 +101,4 @@ def edit(task_id):
         res = {"code":r.status_code,
                "message":"Task %s edited successfully."%title}
     
-    return jsonfiy(res)
+    return jsonify(res)

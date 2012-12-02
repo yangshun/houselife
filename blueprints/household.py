@@ -39,7 +39,7 @@ def household_tasks(household_id):
                     log.debug(task)
                     task["status"] = TASK_STATUS_OPEN
     
-    return jsonfiy(jtasks)
+    return jsonify(jtasks)
     
 @mod.route("/<household_id>/users", methods=["GET"])
 @login_required
@@ -63,4 +63,4 @@ def household_users(household_id):
             jusers = r.json["results"]
             log.debug(jusers)
 
-    return jsonfiy(jusers)
+    return jsonify(jusers)

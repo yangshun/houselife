@@ -52,7 +52,7 @@ def login():
         res = {"code":requests.codes.ok}
         set_session_key(r.json["objectId"])
     
-    return jsonfiy(res)
+    return jsonify(res)
     
 @mod.route("/logout")
 def logout():

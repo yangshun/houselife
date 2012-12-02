@@ -2,7 +2,7 @@ import json
 import logging
 import os
 
-from flask import jsonfiy, Flask, request, redirect, url_for, g, abort,\
+from flask import jsonify, Flask, request, redirect, url_for, g, abort,\
                     session, render_template
 import requests
 
@@ -47,7 +47,7 @@ def dashboard():
     juser = r.json
     if not "household_id" in juser or not juser["household_id"]:
         juser["household_id"] = 0
-    user = jsonfiy(juser)
+    user = jsonify(juser)
     return render_template('main.html', user=user)  
 
 def attach_blueprints_to_app():

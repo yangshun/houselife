@@ -57,7 +57,11 @@ $(function () {
                 }
                 cb();
             } else {
-                this.fetch();
+                this.fetch({
+                    success: function () {
+                        cb();
+                    }
+                });
             }
         }
     });
