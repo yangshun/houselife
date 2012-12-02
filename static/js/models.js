@@ -27,9 +27,13 @@ $(function () {
     Task = Backbone.Model.extend({
         url: '/task/',
         initialize: function () {
+            var taskModel = this;
             this.url = '/task/'+this.get('objectId');
-            this.on('change', function () {
+            this.on('change', function (attr) {
                 this.url = '/task/'+this.get('objectId');
+                if (!attr.status) {
+                    taskModel.set('status', 0);
+                }
             });
         }
     });
