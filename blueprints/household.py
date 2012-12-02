@@ -34,9 +34,10 @@ def household_tasks(household_id):
         else:
             log.info("Got tasks for household %s successfully."%household_id)
             jtasks = r.json["results"]
-            if "status" not in jtasks:
-                jtasks["status"] = TASK_STATUS_OPEN
-            log.debug(jtasks)
+            for task in jtasks:
+                if "status" not in task:
+                    log.debug(task)
+                    task["status"] = TASK_STATUS_OPEN
     
     return json.dumps(jtasks)
     
