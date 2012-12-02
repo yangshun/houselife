@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 mod = Blueprint('task', __name__)
 
-@mod.route("/create", methods=["POST"])
+@mod.route("", methods=["POST"])
 @login_required
 def create():
     log.info("Attempting to create new task.")
@@ -47,7 +47,7 @@ def create():
         
     return Response(json.dumps(jtask), mimetype="application/json")
     
-@mod.route("/<task_id>s/delete", methods=["POST"])
+@mod.route("/<task_id>", methods=["delete"])
 @login_required
 def delete(task_id):
     log.info("Attempting to delete new task.")
@@ -70,7 +70,7 @@ def delete(task_id):
     
     return Response(json.dumps(res), mimetype="application/json")
 
-@mod.route("/<task_id>", methods=["POST"])
+@mod.route("/<task_id>", methods=["PUT"])
 @login_required
 def edit(task_id):
     log.info("Attempting to edit task %s."%task_id)
@@ -92,7 +92,7 @@ def edit(task_id):
                "status": status}
     # a hack for older version of requests?
     headers = PARSE_HEADERS
-    headers["mimetype"] = "application/json"
+    headers["Content-Type"] = "application/json"
     
     r = requests.put(url, data=json.dumps(payload), headers=headers)
     if r.status_code != requests.codes.ok:

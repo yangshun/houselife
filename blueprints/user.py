@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 mod = Blueprint('user', __name__)
 
-@mod.route("/create", methods=["POST"])
+@mod.route("", methods=["POST"])
 def create():
     log.info("Attempting to create new user.")
     log.debug("Info submitted by user: %s"%request.form)
