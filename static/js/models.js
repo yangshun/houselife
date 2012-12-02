@@ -9,7 +9,7 @@ $(function () {
     Household = Backbone.Collection.extend({
         model: User,
         initialize: function () {
-            this.url = 'user/'+user.id+'/household';
+            this.url = 'household/'+this.household_id+'users';
         },
         grab: function (cb, test) {
             if (test) {
@@ -24,7 +24,13 @@ $(function () {
     });
 
     Task = Backbone.Model.extend({
-        url: '/task/'
+        url: '/task/',
+        initialize: function () {
+            this.url = '/task/'+this.id;
+            this.on('change', function () {
+                this.url = '/task/'+this.id;
+            });
+        }
     });
 
     Payment = Backbone.Model.extend({
@@ -37,7 +43,7 @@ $(function () {
     TaskCollection = Backbone.Collection.extend({
         model: Task,
         initialize: function() {
-            this.url = '/user/'+user.id+'/tasks';
+            this.url = '/household/'+appVars.household.get('id')+'/tasks';
         },
         grab: function (cb, test) {
             if (test) {
@@ -54,6 +60,7 @@ $(function () {
 
 function getTaskStub(i) {
     var newTask = new Task();
+    newTask.id = i;
     newTask.set('id', i);
     newTask.set('household_id', 1);
     newTask.set('description', 'haha');
@@ -66,6 +73,7 @@ function getTaskStub(i) {
 
 function getUserStub(i) {
     var newUser = new User();
+    newUser.id = i;
     newUser.set('id', i);
     newUser.set('email', 'lol@lol.com');
     newUser.set('password', 'qwerty');

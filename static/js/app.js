@@ -2,9 +2,6 @@ $(function () {
 
     appVars = {};
 
-    user = {
-        id: 123
-    };
     var App = Backbone.Router.extend({
         initialize: function () {
 
@@ -115,7 +112,7 @@ $(function () {
     var AnalyticsView = NavigationView.extend({
         el: $('#analytics-container'),
         initialize: function () {
-            google.load("visualization", "1", {packages:["corechart"]});
+            var thisView = this;
             google.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
@@ -130,8 +127,7 @@ $(function () {
                 var options = {
                   title: 'My Daily Activities'
                 };
-
-                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.PieChart(thisView.el);
                 chart.draw(data, options);
             }
         }
@@ -144,7 +140,8 @@ $(function () {
         }
     });
 
-    appVars.household = new Household();
+    appVars.user = new User(user);
+    appVars.household = new Household(appVars.user.get('household_id'));
     appVars.household.grab(function () {
         app = new App({});
         Backbone.history.start({pushState:true});
