@@ -1,13 +1,12 @@
 $(function () {
 
+    appVars = {};
+
     user = {
         id: 123
     };
     var App = Backbone.Router.extend({
         initialize: function () {
-            var tasks = new TaskCollection();
-            tasks.fetch();
-
 
             var views = this.views = {
                 'todo': new TodoView(),
@@ -50,7 +49,19 @@ $(function () {
                 thisApp.navigate('dashboard/expenses', {trigger:true});
             });
 
+            $('#nav-logout').click(function (e) {
+                e.preventDefault();
+                window.location.href = '/logout';
+            });
+
+            this.route(/^dashboard\/(.*)/, "default", function () {
+                this.showView('todo');
+            });
             this.route(/^dashboard\/(.*)/, "view", this.showView);
+
+
+
+
         },
         showView: function(view) {
             this.hideViews();
@@ -69,30 +80,67 @@ $(function () {
 
 
     var TodoView = NavigationView.extend({
-        el: $('#todo-container')
+        el: $('#todo-container'),
+        initialize: function () {
+            taskCollection = new TaskCollection();
+            taskCollectionView = new TaskCollectionView({
+                collection: taskCollection
+            });
+
+            taskCollection.grab(function () {
+                    $('#add-task-btn').click(function () {
+                    var newTask = new Task();
+                    taskCollection.add(newTask);
+                    taskCollectionView.taskViews[newTask.cid].renderEditView();
+                });
+            }, true);
+
+            $('#tasks-container').append(taskCollectionView.$el);
+
+
+        }
 
     });
 
     var ProfileView = NavigationView.extend({
-        el: $('#profile-container')
+        el: $('#profile-container'),
+        initialize: function () {
+
+        }
     });
 
     var FeedView = NavigationView.extend({
-        el: $('#feed-container')
+        el: $('#feed-container'),
+        initialize: function() {
+
+        }
     });
 
     var AnalyticsView = NavigationView.extend({
-        el: $('#analytics-container')
+        el: $('#analytics-container'),
+        initialize: function () {
+
+        }
     });
 
     var ExpensesView = NavigationView.extend({
-        el: $('#expenses-container')
+        el: $('#expenses-container'),
+        initialize: function () {
+
+        }
     });
 
+    appVars.household = new Household();
+    appVars.household.grab(function () {
+        app = new App({});
+        Backbone.history.start({pushState:true});
 
-    app = new App({});
+    }, true);
 
-    Backbone.history.start({pushState:true});
+    appVars.user = new User();
+    appVars.user.set(user);
+
+    
 
 
 

@@ -1,3 +1,6 @@
+<script>
+    var user = JSON.parse("{{ user }}");
+</script>
 <script src="/static/js/underscore.js"></script>
 <script src="/static/js/backbone.js"></script>
 <script src="/static/js/models.js"></script>
@@ -7,10 +10,17 @@
 
 <div class="container js-nav-container" id="todo-container">
     <h1>Todos</h1>
+    <div id="ui">
+        <button style="float:right" class="btn" id="add-task-btn">Add Task</button>
+    </div>
+    <div id="tasks-container">
+
+    </div>
 </div>
 
 <div class="container js-nav-container hide" id="profile-container">
     <h1>Profile</h1>
+    <div class="">
 </div>
 
 <div class="container js-nav-container hide" id="feed-container">
