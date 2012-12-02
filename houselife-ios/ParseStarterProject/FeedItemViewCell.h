@@ -13,5 +13,6 @@
 @property (nonatomic, unsafe_unretained) IBOutlet UILabel *title;
 @property (nonatomic, unsafe_unretained) IBOutlet UILabel *desc;
 @property (nonatomic, unsafe_unretained) IBOutlet UILabel *assignee;
+@property (nonatomic, unsafe_unretained) IBOutlet UIImageView *thumb;
 
 @end

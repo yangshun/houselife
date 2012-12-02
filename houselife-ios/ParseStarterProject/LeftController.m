@@ -13,6 +13,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileViewController.h"
 #import "ActivityViewController.h"
+#import "StatisticsViewController.h"
+#import "NearbyViewController.h"
 
 @implementation LeftController
 
@@ -59,7 +61,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 5;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,7 +82,7 @@
     NSString *title;
     switch (indexPath.row) {
         case 0:
-            title = @"HouseLife";
+            title = @"Tasks";
             cell.imageView.image = [UIImage imageNamed:@"icon-tasks"];
             break;
         case 1:
@@ -96,10 +98,6 @@
             cell.imageView.image = [UIImage imageNamed:@"icon-location"];
             break;
         case 4:
-            title = @"Expenses";
-            cell.imageView.image = [UIImage imageNamed:@"icon-expenses"];
-            break;
-        case 5:
             title = @"Profile";
             cell.imageView.image = [UIImage imageNamed:@"icon-profile"];
             break;
@@ -153,14 +151,13 @@
             break;
         case 2:
             title = @"Statistics";
+            controller = [[StatisticsViewController alloc] init];
             break;
         case 3:
             title = @"Nearby";
+            controller = [[NearbyViewController alloc] init];
             break;
         case 4:
-            title = @"Expenses";
-            break;
-        case 5:
             title = @"Profile";
             controller = [[ProfileViewController alloc] init];
             break;

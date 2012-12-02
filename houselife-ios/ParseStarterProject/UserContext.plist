@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>APPSTORE_BUILD</key>
+	<false/>
+	<key>PRODUCTION_API_KEY</key>
+	<string></string>
+	<key>SANDBOX_API_KEY</key>
+	<string>93d33f57-ef3b-4fd5-9775-c1e2a286b094</string>
+	<key>FEATURE_NAME</key>
+	<string>Convenience Notifications</string>
+	<key>FEATURE_DESCRIPTION</key>
+	<string>Receive a notification when you are near a location that you can complete a task.</string>
+</dict>
+</plist>

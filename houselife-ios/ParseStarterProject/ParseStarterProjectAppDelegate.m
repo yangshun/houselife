@@ -10,7 +10,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
-     [Parse setApplicationId:@"gE9acp6H6vAqSMtwP8SsjWGpWNibQg5cRE56B4IB" clientKey:@"tkxvLA6trb7XiSM16PNwUZNHklkWBYBHq8YVlTwW"];
+     [Parse setApplicationId:@"bCUoVehXrGrZ5mQEZae9m0Y1xL0uSvJSuwIq1tWs" clientKey:@"uFr77fGe0Hg2WQk1b2vFhd0tpk3fHmGl3YyFj4yp"];
     //
     // If you are using Facebook, uncomment and fill in with your Facebook App Id:
     // [PFFacebookUtils initializeWithApplicationId:@"your_facebook_app_id"];
@@ -43,7 +43,16 @@
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
                                                     UIRemoteNotificationTypeAlert|
                                                     UIRemoteNotificationTypeSound];
+    [self loadAllUsers];
     return YES;
+}
+
+- (void)loadAllUsers {
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.allUsers = objects;
+        
+    }];
 }
 
 /*
