@@ -8,6 +8,9 @@ $(function () {
             'username': $('#login-username').val(),
             'password': $('#login-password').val()
         }, function(res) {
+            if (typeof(res) == 'string') {
+                res = JSON.parse(res);
+            }
             var success;
             if (res.code && res.code == 200) {
                 success = true;
