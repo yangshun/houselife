@@ -8,8 +8,9 @@ $(function () {
 
     Household = Backbone.Collection.extend({
         model: User,
-        initialize: function () {
-            this.url = 'household/'+this.household_id+'users';
+        initialize: function (household_id) {
+            this.url = 'household/'+household_id+'/users';
+            this.id = household_id;
         },
         grab: function (cb, test) {
             if (test) {
@@ -26,9 +27,9 @@ $(function () {
     Task = Backbone.Model.extend({
         url: '/task/',
         initialize: function () {
-            this.url = '/task/'+this.id;
+            this.url = '/task/'+this.get('objectId');
             this.on('change', function () {
-                this.url = '/task/'+this.id;
+                this.url = '/task/'+this.get('objectId');
             });
         }
     });
@@ -43,7 +44,7 @@ $(function () {
     TaskCollection = Backbone.Collection.extend({
         model: Task,
         initialize: function() {
-            this.url = '/household/'+appVars.household.get('id')+'/tasks';
+            this.url = '/household/'+appVars.household.id+'/tasks';
         },
         grab: function (cb, test) {
             if (test) {

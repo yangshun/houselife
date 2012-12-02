@@ -127,10 +127,11 @@ $(function () {
                 taskViews[model.cid].remove();
             });
 
-            this.collection.on('reset', function (model, collection) {
+            this.collection.on('reset', function (collection) {
                 for (var i in taskViews) {
                     taskViews[i].remove();
                 }
+
                 for (var j = 0; j < collection.models.length; j++) {
                     var collectionModel = collection.models[j];
                     addView(collectionModel);

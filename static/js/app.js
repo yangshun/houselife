@@ -86,7 +86,7 @@ $(function () {
                     taskCollection.add(newTask);
                     taskCollectionView.taskViews[newTask.cid].renderEditView();
                 });
-            }, true);
+            }, false);
 
             $('#tasks-container').append(taskCollectionView.$el);
 
