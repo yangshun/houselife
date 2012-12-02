@@ -26,6 +26,10 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template('main.html')
+
 def attach_blueprints_to_app():
     pass
     """
