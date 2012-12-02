@@ -2,9 +2,6 @@ $(function () {
 
     appVars = {};
 
-    user = {
-        id: 123
-    };
     var App = Backbone.Router.extend({
         initialize: function () {
 
@@ -34,14 +31,10 @@ $(function () {
                 thisApp.navigate('dashboard/profile', {trigger:true});
             });
 
-            $('#nav-feed').click(function (e) {
-                e.preventDefault();
-                thisApp.navigate('dashboard/feed', {trigger:true});
-            });
 
             $('#nav-analytics').click(function (e) {
                 e.preventDefault();
-                thisApp.navigate('dashboard/profile', {trigger:true});
+                thisApp.navigate('dashboard/analytics', {trigger:true});
             });
 
             $('#nav-expenses').click(function(e) {
@@ -93,7 +86,7 @@ $(function () {
                     taskCollection.add(newTask);
                     taskCollectionView.taskViews[newTask.cid].renderEditView();
                 });
-            }, true);
+            }, false);
 
             $('#tasks-container').append(taskCollectionView.$el);
 
@@ -119,7 +112,24 @@ $(function () {
     var AnalyticsView = NavigationView.extend({
         el: $('#analytics-container'),
         initialize: function () {
+            var thisView = this;
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                  ['Task', 'Hours per Day'],
+                  ['Work',     11],
+                  ['Eat',      2],
+                  ['Commute',  2],
+                  ['Watch TV', 2],
+                  ['Sleep',    7]
+                ]);
 
+                var options = {
+                  title: 'My Daily Activities'
+                };
+                var chart = new google.visualization.PieChart(thisView.el);
+                chart.draw(data, options);
+            }
         }
     });
 
@@ -130,7 +140,8 @@ $(function () {
         }
     });
 
-    appVars.household = new Household();
+    appVars.user = new User(user);
+    appVars.household = new Household(appVars.user.get('household_id'));
     appVars.household.grab(function () {
         app = new App({});
         Backbone.history.start({pushState:true});

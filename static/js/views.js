@@ -31,6 +31,9 @@ $(function () {
 
             var $deleteEntry = $('<td>');
             var $deleteButton = $('<button class="btn">Delete</button>');
+            $deleteButton.click(function () {
+                thisView.model.destroy();
+            });
             $deleteEntry.append($deleteButton);
 
             $tableRow
@@ -73,8 +76,12 @@ $(function () {
             var $saveEntry = $('<td>');
             var $saveButton = $('<button class="btn">Save</button>');
             $saveButton.click(function () {
-                // TODO: Implement save
                 thisView.renderNormalView();
+                thisView.model.save({
+                    success: function () {
+                        alert("save success!");
+                    }
+                });
             });
             $saveEntry.append($saveButton);
 
@@ -120,10 +127,11 @@ $(function () {
                 taskViews[model.cid].remove();
             });
 
-            this.collection.on('reset', function (model, collection) {
+            this.collection.on('reset', function (collection) {
                 for (var i in taskViews) {
                     taskViews[i].remove();
                 }
+
                 for (var j = 0; j < collection.models.length; j++) {
                     var collectionModel = collection.models[j];
                     addView(collectionModel);
