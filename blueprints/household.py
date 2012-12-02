@@ -36,3 +36,27 @@ def household_tasks(household_id):
             log.debug(jtasks)
     
     return json.dumps(jtasks)
+    
+@mod.route("/<household_id>/users", methods=["GET"])
+@login_required
+def household_tasks(household_id):
+    log.info("Getting users for household id %s."%household_id)
+    if household_id in (None, "0"):
+        jusers = {"code":requests.codes.ok,
+                  "message":"User is not in any household yet."}
+    else:
+        url = os.path.join(PARSE_BASE_API, "users")
+        query = dict(household_id=household_id)
+        params = dict(where=json.dumps(query))
+
+        r = requests.get(url, params=params, headers=PARSE_HEADERS)
+        if r.status_code != requests.codes.ok:
+            log.debug("Failed to get users.")
+            jusers = {"code":r.status_code,
+                     "message":"Error getting users."}
+        else:
+            log.info("Got users for household %s successfully."%household_id)
+            jusers = r.json["results"]
+            log.debug(jusers)
+
+    return json.dumps(jusers)
