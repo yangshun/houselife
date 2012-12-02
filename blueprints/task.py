@@ -91,7 +91,6 @@ def edit(task_id):
                "assignee_id": assignee_id, "location": location,
                "status": status}
     r = requests.put(url, data=json.dumps(payload), headers=PARSE_HEADERS)
-    
     if r.status_code != requests.codes.ok:
         res = {"code":r.status_code, "message":r.json["error"]}
         log.debug("Failed to edit task %s: %s %s"%(task_id, 
