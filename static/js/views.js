@@ -59,18 +59,41 @@ $(function () {
             var $descriptionInput = $('<input>');
             $descriptionInput
                 .val(this.model.get('description'))
+                .on('change', function () {
+                    thisView.model.set('description', $(this).val());
+                })
                 .appendTo($descriptionEntry);
             var $titleEntry = $('<td>');
             var $titleInput = $('<input>');
             $titleInput
                 .val(this.model.get('title'))
+                .on('change', function () {
+                    thisView.model.set('title', $(this).val());
+                })
                 .appendTo($titleEntry);
             var $assigneeEntry = $('<td>');
-            $assigneeEntry.html(appVars.household.get(this.model.get('assignee_id')));
+
+            var user = appVars.household.find(
+                function (user) {
+                    return user.id == thisView.model.get('assignee_id');
+                }
+            );
+
+            /*
+            if (user.length > 0) {
+                user = user[0];
+            }
+
+            console.log(user);
+            */
+            $assigneeEntry.html();
             var $statusEntry = $('<td>');
-            var $statusInput = $('<input>');
+            var $statusInput = $('<select><option value="0">Open</option><option value="1">Completed</option>');
             $statusInput
                 .val(this.model.get('status'))
+                .on('change', function () {
+                    thisView.model.set('status', $(this).val());
+                })
                 .appendTo($statusEntry);
 
             var $saveEntry = $('<td>');
