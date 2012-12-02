@@ -7,7 +7,6 @@ $(function () {
 
             var views = this.views = {
                 'todo': new TodoView(),
-                'profile': new ProfileView(),
                 'feed': new FeedView(),
                 'analytics': new AnalyticsView(),
                 'expenses': new ExpensesView()
@@ -25,12 +24,6 @@ $(function () {
                 e.preventDefault();
                 thisApp.navigate('dashboard/todo', {trigger:true});
             });
-
-            $('#nav-profile').click(function (e) {
-                e.preventDefault();
-                thisApp.navigate('dashboard/profile', {trigger:true});
-            });
-
 
             $('#nav-analytics').click(function (e) {
                 e.preventDefault();
@@ -99,13 +92,6 @@ $(function () {
 
         }
 
-    });
-
-    var ProfileView = NavigationView.extend({
-        el: $('#profile-container'),
-        initialize: function () {
-
-        }
     });
 
     var FeedView = NavigationView.extend({
