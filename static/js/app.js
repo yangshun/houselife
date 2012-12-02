@@ -149,8 +149,8 @@ $(function () {
             taskCollection.grab(function () {
                 $('#add-task-btn').click(function () {
                     $( "#dialog-modal" ).dialog({
-                        height: 440,
-                        width: 850,
+                        height: 370,
+                        width: 750,
                         modal: true
                     });
                 });
