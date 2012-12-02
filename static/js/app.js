@@ -1,3 +1,50 @@
+function renderGraph(el) {
+    var taskData = taskCollection.getTaskCollectionAsArray();
+
+    var headers = taskData[0];
+
+    var userIndex = headers.indexOf('assignee_id');
+
+
+    var filteredData = [];
+    for (var i = 0; i < taskData.length; i++) {
+        filteredData.push(taskData[i].filter(function (el, index) {
+            return (index == userIndex);
+        })[0]);
+    }
+
+    var dictCount = {};
+
+
+    for (var j = 1; j < filteredData.length; j++) {
+        if (dictCount[filteredData[j]]) {
+            dictCount[filteredData[j]]++;
+        } else {
+            dictCount[filteredData[j]] = 1;
+        }
+    }
+
+    console.log(filteredData);
+    console.log(dictCount);
+
+    var dataTable = [];
+    dataTable.push(['User', 'Tasks Done']);
+    for (var k in dictCount) {
+        dataTable.push([k,dictCount[k]]);
+    }
+
+    console.log(dataTable);
+
+    var data = google.visualization.arrayToDataTable(dataTable);
+
+    var options = {
+      title: 'Task Distribution'
+    };
+    var chart = new google.visualization.PieChart(el);
+    chart.draw(data, options);
+    taskCollection.off('reset', renderGraph);
+}
+
 $(function () {
 
     appVars = {};
@@ -28,6 +75,7 @@ $(function () {
             $('#nav-analytics').click(function (e) {
                 e.preventDefault();
                 thisApp.navigate('dashboard/analytics', {trigger:true});
+                renderGraph(thisView.$el.find('#distribution-graph')[0]);
             });
 
             $('#nav-expenses').click(function(e) {
@@ -112,26 +160,15 @@ $(function () {
                 google.setOnLoadCallback(drawChart);
             }
             function drawChart() {
-                var dataArray = [];
-                dataArray.push(['User', 'Tasks Completed']);
-                for (var i = 0; i < taskCollection.length; i++) {
-                    
+                if (taskCollection.length === 0) {
+                    taskCollection.on('reset', function () {
+                        renderGraph(thisView.$el.find('#distribution-graph')[0]);
+                    });
+                } else {
+                    renderGraph(this.el);
                 }
 
-                var data = google.visualization.arrayToDataTable([
-                  ['Task', 'Hours per Day'],
-                  ['Work',     11],
-                  ['Eat',      2],
-                  ['Commute',  2],
-                  ['Watch TV', 2],
-                  ['Sleep',    7]
-                ]);
 
-                var options = {
-                  title: 'My Daily Activities'
-                };
-                var chart = new google.visualization.PieChart(thisView.el);
-                chart.draw(data, options);
             }
         }
     });

@@ -28,6 +28,12 @@ $(function () {
         },
         parse: function (response) {
             return response;
+        },
+        getUserByObjectId: function (objectId) {
+            var filteredLyst = this.models.filter(function (user) {
+                return (objectId == user.get('objectId'));
+            });
+            return (filteredLyst.length === 0) ? undefined : filteredLyst[0];
         }
     });
 
@@ -75,6 +81,37 @@ $(function () {
                     }
                 });
             }
+        },
+        getTaskCollectionAsArray: function () {
+            var returnArray = [];
+            if (this.models.length === 0) {
+                return [];
+            }
+            var headerRow = [];
+            for (var i in this.models[0].attributes) {
+                headerRow.push(i);
+            }
+            returnArray.push(headerRow);
+
+
+
+            for (i = 0; i < this.models.length; i++) {
+                var row = [];
+                for (var j = 0; j < headerRow.length; j++) {
+                    if (headerRow[j] == "assignee_id") {
+                        var assignee_id = this.models[i].get(headerRow[j]);
+                        var user = appVars.household.getUserByObjectId(assignee_id);
+                        var name = user ? user.get('username') : undefined;
+                        row.push(name);
+                    } else {
+                        row.push(this.models[i].get(headerRow[j]));
+                    }
+                }
+                returnArray.push(row);
+            }
+
+            return returnArray;
+
         }
     });
 });
