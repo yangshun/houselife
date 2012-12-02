@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 mod = Blueprint('task', __name__)
 
-@mod.route("/create", methods=["POST"])
+@mod.route("/", methods=["POST"])
 @login_required
 def create():
     log.info("Attempting to create new task.")
@@ -36,7 +36,10 @@ def create():
     payload = {"household_id": household_id, "description": description,
                 "title": title, "assignee_id": assignee_id,
                 "location": location, "status": status}
-    r = requests.post(url, data=json.dumps(payload), headers=PARSE_HEADERS)
+    headers = PARSE_HEADERS
+    headers["Content-Type"] = "application/json"
+
+    r = requests.post(url, data=json.dumps(payload), headers=headers)
     if r.status_code != requests.codes.created:
         jtask = {"code":r.status_code, "message":r.json["error"]}
         log.debug("Error creating new task: %s %s"%(r.status_code, r.json))

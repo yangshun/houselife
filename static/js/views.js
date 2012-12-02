@@ -63,7 +63,7 @@ $(function () {
             return $tableRow;
         },
 
-        renderEditView: function () {
+        renderEditView: function (create) {
             var thisView = this;
 
             var $tableRow = $('<tr>');
@@ -113,15 +113,19 @@ $(function () {
                 })
                 .appendTo($assigneeEntry);
 
-
             var $statusEntry = $('<td>');
-            var $statusInput = $('<select><option value="0">Open</option><option value="1">Completed</option>');
-            $statusInput
-                .val(this.model.get('status'))
-                .on('change', function () {
-                    thisView.model.set('status', $(this).val());
-                })
-                .appendTo($statusEntry);
+            if (create) {
+                $statusEntry.html("Open");
+            } else {
+                var $statusInput = $('<select><option value="0">Open</option><option value="1">Completed</option>');
+                $statusInput
+                    .val(this.model.get('status'))
+                    .on('change', function () {
+                        thisView.model.set('status', $(this).val());
+                    })
+                    .appendTo($statusEntry);                
+            }
+
 
             var $saveEntry = $('<td>');
             var $saveButton = $('<button class="btn">Save</button>');

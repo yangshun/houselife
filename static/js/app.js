@@ -86,7 +86,7 @@ $(function () {
                         "household_id": appVars.user.get('household_id')
                     });
                     taskCollection.add(newTask);
-                    taskCollectionView.taskViews[newTask.cid].renderEditView();
+                    taskCollectionView.taskViews[newTask.cid].renderEditView(true);
                 });
             }, false);
             $('#tasks-container').append(taskCollectionView.$el);
