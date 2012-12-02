@@ -18,12 +18,12 @@ mod = Blueprint('task', __name__)
 @login_required
 def create():
     log.info("Attempting to create new task.")
-    log.debug("Info submitted by user: %s"%request.form)
-    household_id = request.form.get("household_id", "")
-    description = request.form.get("description", "")
-    title = request.form.get("title", "")
-    assignee_id = request.form.get("assignee_id", "")
-    location = request.form.get("location", "")
+    log.debug("Info submitted by user: %s"%request.json)
+    household_id = request.json.get("household_id", "")
+    description = request.json.get("description", "")
+    title = request.json.get("title", "")
+    assignee_id = request.json.get("assignee_id", "")
+    location = request.json.get("location", "")
     status = TASK_STATUS_OPEN
     
     if not household_id:
@@ -79,11 +79,11 @@ def edit(task_id):
                "message":"No task ID."}
         return Response(json.dumps(res), mimetype="application/json")
     
-    description = request.form.get("description", "")
-    title = request.form.get("title", "")
-    assignee_id = request.form.get("assignee_id", "")
-    location = request.form.get("location", "")
-    status = int(request.form.get("status"))
+    description = request.json.get("description", "")
+    title = request.json.get("title", "")
+    assignee_id = request.json.get("assignee_id", "")
+    location = request.json.get("location", "")
+    status = int(request.json.get("status"))
     
     url = os.path.join(PARSE_BASE_API, "classes/task", task_id)
     
