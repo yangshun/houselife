@@ -5,8 +5,8 @@ function showErrorMessage(msg) {
 $(function () {
     $('#js-login').click(function () {
         $.post('/user/login', {
-            'username': $('login-username').val(),
-            'password': $('login-password').val()
+            'username': $('#login-username').val(),
+            'password': $('#login-password').val()
         }, function(res) {
             //TODO: change when endpoint is defined
             var success = true;
@@ -21,9 +21,9 @@ $(function () {
 
     $('#js-signup').click(function () {
         $.post('/user/create', {
-            'username': $('signup-username').val(),
-            'email': $('signup-email').val(),
-            'password': $('signup-password').val()
+            'username': $('#signup-username').val(),
+            'email': $('#signup-email').val(),
+            'password': $('#signup-password').val()
         }, function (res) {
             //TODO: change when endpoint is defined
             var success = true;
