@@ -4,6 +4,8 @@ d]
 
 .DS_Store
 
+*.pyc
+
 # C extensions
 *.so
 
