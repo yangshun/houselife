@@ -90,7 +90,11 @@ def edit(task_id):
     payload = {"description": description, "title": title,
                "assignee_id": assignee_id, "location": location,
                "status": status}
-    r = requests.put(url, data=json.dumps(payload), headers=PARSE_HEADERS)
+    # a hack for older version of requests?
+    headers = PARSE_HEADERS
+    headers["mimetype"] = "application/json"
+    
+    r = requests.put(url, data=json.dumps(payload), headers=headers)
     if r.status_code != requests.codes.ok:
         res = {"code":r.status_code, "message":r.json["error"]}
         log.debug("Failed to edit task %s: %s %s"%(task_id, 
