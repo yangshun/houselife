@@ -14,6 +14,7 @@
 #import "ProfileViewController.h"
 #import "ActivityViewController.h"
 #import "StatisticsViewController.h"
+#import "NearbyViewController.h"
 
 @implementation LeftController
 
@@ -158,6 +159,7 @@
             break;
         case 3:
             title = @"Nearby";
+            controller = [[NearbyViewController alloc] init];
             break;
         case 4:
             title = @"Expenses";
