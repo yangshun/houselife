@@ -165,6 +165,8 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
+  background-image: url('/static/img/gray_jean.png');
+  background-repeat: repeat;
 }
 
 a {
@@ -4424,7 +4426,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
-  color: #333333;
+  color: #0072bc;
   text-decoration: none;
   background-color: transparent;
 }
