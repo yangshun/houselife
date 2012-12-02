@@ -3,7 +3,7 @@ import logging
 import os
 
 from flask import request, Blueprint, g, redirect, url_for, abort,\
-                    render_template
+                    render_template, jsonify
 import requests
 
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
@@ -52,7 +52,7 @@ def login():
         res = {"code":requests.codes.ok}
         set_session_key(r.json["objectId"])
     
-    return json.dumps(res)
+    return jsonfiy(res)
     
 @mod.route("/logout")
 def logout():
