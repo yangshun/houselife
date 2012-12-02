@@ -70,7 +70,7 @@ def delete(task_id):
     
     return Response(json.dumps(res), mimetype="application/json")
 
-@mod.route("/<task_id>", methods=["POST"])
+@mod.route("/<task_id>", methods=["PUT"])
 @login_required
 def edit(task_id):
     log.info("Attempting to edit task %s."%task_id)

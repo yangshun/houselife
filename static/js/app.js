@@ -82,7 +82,9 @@ $(function () {
 
             taskCollection.grab(function () {
                 $('#add-task-btn').click(function () {
-                    var newTask = new Task();
+                    var newTask = new Task({
+                        "household_id": appVars.user.get('household_id')
+                    });
                     taskCollection.add(newTask);
                     taskCollectionView.taskViews[newTask.cid].renderEditView();
                 });

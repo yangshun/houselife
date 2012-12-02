@@ -17,10 +17,22 @@ $(function () {
             $descriptionEntry.html(this.model.get('description'));
             var $titleEntry = $('<td>');
             $titleEntry.html(this.model.get('title'));
+            
             var $assigneeEntry = $('<td>');
-            $assigneeEntry.html(appVars.household.get(this.model.get('assignee_id')));
+            var user = appVars.household.find(
+                function (user) {
+                    return user.get('objectId') == thisView.model.get('assignee_id');
+                }
+            );
+
+            if (user) {
+                $assigneeEntry.html(user.get('username'));
+            }
+
             var $statusEntry = $('<td>');
-            $statusEntry.html(this.model.get('status'));
+
+            var status = this.model.get('status') ? "Completed" : "Open";
+            $statusEntry.html(status);
 
             var $editEntry = $('<td>');
             var $editButton = $('<button class="btn">Edit</button>');
@@ -73,15 +85,35 @@ $(function () {
                     thisView.model.set('title', $(this).val());
                 })
                 .appendTo($titleEntry);
+
+
             var $assigneeEntry = $('<td>');
 
-            var user = appVars.household.find(
+            var $assigneeSelect = $('<select>');
+
+            var selectedUser = appVars.household.find(
                 function (user) {
                     return user.get('objectId') == thisView.model.get('assignee_id');
                 }
             );
 
-            $assigneeEntry.html();
+            $assigneeSelect.append($('<option value="None">None</option>'));
+
+            appVars.household.each(function (user) {
+                if (selectedUser && selectedUser.cid == user.cid) {
+                    $assigneeSelect.append($('<option selected value='+user.get('objectId')+'>'+user.get('username')+'</option>'));
+                } else {
+                    $assigneeSelect.append($('<option value='+user.get('objectId')+'>'+user.get('username')+'</option>'));
+                }
+            });
+
+            $assigneeSelect
+                .on('change', function () {
+                    thisView.model.set('assignee_id', $(this).val());
+                })
+                .appendTo($assigneeEntry);
+
+
             var $statusEntry = $('<td>');
             var $statusInput = $('<select><option value="0">Open</option><option value="1">Completed</option>');
             $statusInput

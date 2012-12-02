@@ -35,12 +35,11 @@ $(function () {
         url: '/task/',
         initialize: function () {
             var taskModel = this;
-            this.url = '/task/'+this.get('objectId');
+            var objectId = this.get('objectId') ? this.get('objectId') : "";
+            this.url = '/task/'+objectId;
             this.on('change', function (attr) {
-                this.url = '/task/'+this.get('objectId');
-                if (!attr.status) {
-                    taskModel.set('status', 0);
-                }
+                var objectId = this.get('objectId') ? this.get('objectId') : "";
+                this.url = '/task/'+objectId;
             });
         }
     });
