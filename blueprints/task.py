@@ -47,7 +47,7 @@ def create():
         
     return Response(json.dumps(jtask), mimetype="application/json")
     
-@mod.route("/<task_id>s/delete", methods=["POST"])
+@mod.route("/<task_id>", methods=["DELETE"])
 @login_required
 def delete(task_id):
     log.info("Attempting to delete new task.")
@@ -92,7 +92,7 @@ def edit(task_id):
                "status": status}
     # a hack for older version of requests?
     headers = PARSE_HEADERS
-    headers["mimetype"] = "application/json"
+    headers["Content-Type"] = "application/json"
     
     r = requests.put(url, data=json.dumps(payload), headers=headers)
     if r.status_code != requests.codes.ok:

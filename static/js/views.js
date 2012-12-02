@@ -32,7 +32,9 @@ $(function () {
             var $deleteEntry = $('<td>');
             var $deleteButton = $('<button class="btn">Delete</button>');
             $deleteButton.click(function () {
-                thisView.model.destroy();
+                thisView.model.destroy({
+                    wait:true
+                });
             });
             $deleteEntry.append($deleteButton);
 
@@ -75,17 +77,10 @@ $(function () {
 
             var user = appVars.household.find(
                 function (user) {
-                    return user.id == thisView.model.get('assignee_id');
+                    return user.get('objectId') == thisView.model.get('assignee_id');
                 }
             );
 
-            /*
-            if (user.length > 0) {
-                user = user[0];
-            }
-
-            console.log(user);
-            */
             $assigneeEntry.html();
             var $statusEntry = $('<td>');
             var $statusInput = $('<select><option value="0">Open</option><option value="1">Completed</option>');

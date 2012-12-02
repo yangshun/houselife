@@ -9,7 +9,7 @@ $(function () {
     Household = Backbone.Collection.extend({
         model: User,
         initialize: function (household_id) {
-            this.url = 'household/'+household_id+'/users';
+            this.url = '/household/'+household_id+'/users';
             this.id = household_id;
         },
         grab: function (cb, test) {
@@ -19,8 +19,15 @@ $(function () {
                 }
                 cb();
             } else {
-                this.fetch();
+                this.fetch({
+                    success: function () {
+                        cb();
+                    }
+                });
             }
+        },
+        parse: function (response) {
+            return response;
         }
     });
 

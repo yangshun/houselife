@@ -145,7 +145,7 @@ $(function () {
         app = new App({});
         Backbone.history.start({pushState:true});
 
-    }, true);
+    }, false);
 
     appVars.user = new User();
     appVars.user.set(user);
