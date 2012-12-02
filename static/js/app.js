@@ -103,13 +103,6 @@ $(function () {
 
     });
 
-    var ProfileView = NavigationView.extend({
-        el: $('#profile-container'),
-        initialize: function () {
-
-        }
-    });
-
     var FeedView = NavigationView.extend({
         el: $('#feed-container'),
         initialize: function() {
