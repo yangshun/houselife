@@ -8,6 +8,7 @@ import requests
 
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
 from common.auth import login_required, set_session_key, remove_session_key
+from common import TASK_STATUS_OPEN, TASK_STATUS_COMPLETED
 
 log = logging.getLogger(__name__)
 
@@ -33,6 +34,8 @@ def household_tasks(household_id):
         else:
             log.info("Got tasks for household %s successfully."%household_id)
             jtasks = r.json["results"]
+            if "status" not in jtasks:
+                jtasks["status"] = TASK_STATUS_OPEN
             log.debug(jtasks)
     
     return json.dumps(jtasks)
