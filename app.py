@@ -31,6 +31,7 @@ def dashboard():
     return render_template('main.html')
 
 def attach_blueprints_to_app():
+    from blueprints import user
     app.register_blueprint(user.mod, url_prefix='/%s' % user.mod.name)
 
 if __name__ == '__main__':
