@@ -19,7 +19,7 @@ def login_required(func):
         if session.get(SESSION_KEY, None) is None:
             log.info("User is not logged in. User came from %s. Redirecting to login page..."%request.url)
             return redirect(url_for("login"))
-
+        
         g.user_id = session.get(SESSION_KEY)
         
         return func(*args, **kwargs)
