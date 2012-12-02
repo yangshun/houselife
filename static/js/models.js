@@ -41,6 +41,12 @@ $(function () {
                 var objectId = this.get('objectId') ? this.get('objectId') : "";
                 this.url = '/task/'+objectId;
             });
+        },
+        complete: function (cb) {
+            this.set('status', 1);
+            this.save({
+                success: cb
+            });
         }
     });
 

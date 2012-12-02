@@ -82,11 +82,18 @@ $(function () {
 
             taskCollection.grab(function () {
                 $('#add-task-btn').click(function () {
+                    $( "#dialog-modal" ).dialog({
+                        height: 440,
+                        width: 850,
+                        modal: true
+                    });
+                    /*
                     var newTask = new Task({
                         "household_id": appVars.user.get('household_id')
                     });
                     taskCollection.add(newTask);
                     taskCollectionView.taskViews[newTask.cid].renderEditView(true);
+                    */
                 });
             }, false);
             $('#tasks-container').append(taskCollectionView.$el);
@@ -113,9 +120,22 @@ $(function () {
     var AnalyticsView = NavigationView.extend({
         el: $('#analytics-container'),
         initialize: function () {
+            console.log('lol');
+
             var thisView = this;
-            google.setOnLoadCallback(drawChart);
+
+            if (google.visualization) {
+                drawChart();
+            } else {
+                google.setOnLoadCallback(drawChart);
+            }
             function drawChart() {
+                var dataArray = [];
+                dataArray.push(['User', 'Tasks Completed']);
+                for (var i = 0; i < taskCollection.length; i++) {
+                    
+                }
+
                 var data = google.visualization.arrayToDataTable([
                   ['Task', 'Hours per Day'],
                   ['Work',     11],
@@ -146,6 +166,8 @@ $(function () {
     appVars.household.grab(function () {
         app = new App({});
         Backbone.history.start({pushState:true});
+
+        new ModalEditView();
 
     }, false);
 

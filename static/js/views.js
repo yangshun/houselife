@@ -3,13 +3,24 @@ $(function () {
     TaskView = Backbone.View.extend({
         model: Task,
         initialize: function () {
+            var thisView = this;
             if (this.model instanceof Task) {
-                this.renderNormalView();
+                if (this.model.get('status') < 1) {
+                    this.renderNormalView();
+                }
             }
+            this.model.on('change', function (model) {
+                if (model.get('status') == 1) {
+                    thisView.$el.remove();
+                }
+            });
         },
         renderNormalView: function () {
 
             var thisView = this;
+
+            this.viewType = 'normal';
+
             var $tableRow = $('<tr>');
 
 
@@ -41,6 +52,15 @@ $(function () {
             });
             $editEntry.append($editButton);
 
+            var $completeEntry = $('<td>');
+            var $completeButton = $('<button class="btn">Complete</button>');
+            $completeButton.click(function () {
+                thisView.model.set('status',1);
+                thisView.model.save();
+            });
+            $completeEntry.append($completeButton);
+
+
             var $deleteEntry = $('<td>');
             var $deleteButton = $('<button class="btn">Delete</button>');
             $deleteButton.click(function () {
@@ -51,10 +71,11 @@ $(function () {
             $deleteEntry.append($deleteButton);
 
             $tableRow
-                .append($descriptionEntry)
                 .append($titleEntry)
+                .append($descriptionEntry)
                 .append($assigneeEntry)
                 .append($statusEntry)
+                .append($completeEntry)
                 .append($editEntry)
                 .append($deleteEntry);
 
@@ -65,6 +86,8 @@ $(function () {
 
         renderEditView: function (create) {
             var thisView = this;
+
+            this.viewType = 'edit';
 
             var $tableRow = $('<tr>');
 
@@ -123,7 +146,7 @@ $(function () {
                     .on('change', function () {
                         thisView.model.set('status', $(this).val());
                     })
-                    .appendTo($statusEntry);                
+                    .appendTo($statusEntry);
             }
 
 
@@ -144,8 +167,8 @@ $(function () {
             $deleteEntry.append($deleteButton);
 
             $tableRow
-                .append($descriptionEntry)
                 .append($titleEntry)
+                .append($descriptionEntry)
                 .append($assigneeEntry)
                 .append($statusEntry)
                 .append($saveEntry)
@@ -195,16 +218,49 @@ $(function () {
             // Initialize this DOM element
 
             var $table = $('<table>');
+            $table.addClass('table');
             var $tableRow = $('<tr>');
             $table.append($tableRow);
 
-            var headers = ["Description", "Title", "Assignee", "Status", "Options"];
+            var headers = ["Title", "Description", "Assignee", "Status", "Options"];
 
             for (var i = 0; i < headers.length; i++) {
                 $tableRow.append($('<th>'+headers[i]+'</th>'));
             }
 
             this.setElement($table);
+
+            
+        }
+    });
+
+    ModalEditView = Backbone.View.extend({
+        el: $('#modal-dialog'),
+        model: Task,
+        initialize: function () {
+            var thumbs = [];
+
+            appVars.household.each(function (user) {
+                var img = $('<img class="thumb" src="/static/img/thumb/'+user.get('username').toLowerCase()+'.png"/>');
+                thumbs.push(img);
+                img
+                    .appendTo($('#new-task-assignees'))
+                    .click(function () {
+                        thumbs.forEach(function (img) {
+                            img.removeClass('selected');
+                        });
+                        $(this).addClass('selected');
+
+                    });
+            });
+
+            $('#create-task-btn').click(function () {
+                var newTask = new Task({
+                    "household_id": appVars.user.get('household_id'),
+                });
+                newTask.save();
+                taskCollection.add(newTask);
+            });
         }
     });
 });

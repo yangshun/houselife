@@ -61,8 +61,11 @@ def delete(task_id):
 
     url = os.path.join(PARSE_BASE_API, "classes/task", task_id)
 
-    r = requests.delete(url, headers=PARSE_HEADERS)
-    
+    payload = {"status": 2}
+    headers = PARSE_HEADERS
+    headers["Content-Type"] = "application/json"
+    r = requests.put(url, data=json.dumps(payload), headers=headers)
+
     if r.status_code != requests.codes.ok:
         res = {"code":r.status_code, "message":r.json["error"]}
         log.debug("Failed to delete task %s: %s %s"%(task_id, 
