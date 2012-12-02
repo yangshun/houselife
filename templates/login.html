@@ -1,8 +1,8 @@
 <head>
     <title>Houselife</title>
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
-    <script src="/static/js/jq.js" />
-    <script src="/static/js/login.js" />
+    <script src="/static/js/jq.js"></script>
+    <script src="/static/js/login.js"></script>
 </head>
 <body>
     {% include "navbar.html" %}
@@ -14,10 +14,11 @@
         <button id="js-ToSignup" class="btn btn-primary">Sign Up</button>
         <button id="js-login" class="btn btn-info">Login</button>
     </div>
-    <div id="signup" class="container hide">
+    <div id="signup-container" class="container hide">
         <h1>Sign up</h1>
-        <input type="text" placeholder="username"/> <br />
-        <input placeholder="password" type="password" /> <br />
+        <input id="signup-username" type="text" placeholder="username"/> <br />
+        <input id="signup-email" placeholder="email" type="text" /> <br />
+        <input id="signup-password" placeholder="password" type="password" /> <br />
         <button id="js-ToLogin" class="btn btn-primary">Back to login</button>
         <button id="js-signup" class="btn btn-info">Sign Up</button>
     </div>

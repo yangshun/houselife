@@ -2,6 +2,8 @@
 export HISTTIMEFORMAT="%F %T "
 d]
 
+.DS_Store
+
 # C extensions
 *.so
 

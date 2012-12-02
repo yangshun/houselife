@@ -27,9 +27,11 @@ def login():
     return render_template('login.html')
 
 def attach_blueprints_to_app():
+    pass
+    """
     from blueprints import user
     app.register_blueprint(user.mod, url_prefix='/%s' % engagement.mod.name)
-
+    """
 if __name__ == '__main__':
     attach_blueprints_to_app()
 
