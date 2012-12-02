@@ -9,34 +9,6 @@ import requests
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
 from common.auth import login_required
 
-
-from gevent import monkey
-from gevent.event import Event
-from gevent.wsgi import WSGIServer
-
-monkey.patch_all()
-
-
-class Realtime(object):
-
-    def __init__(self):
-        self.messages = []
-        self.event = Event()
-
-    def add_message(self, message):
-
-        self.messages.append(message)
-        self.event.set()
-        self.event.clear()
-
-    def wait(self):
-        self.event.wait()
-
-    def get_messages(self):
-        return self.messages
-
-
-realtime = Realtime()
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -101,5 +73,4 @@ if __name__ == '__main__':
     attach_blueprints_to_app()
     
     app.secret_key = "|D\xd1s/\x98\xdb\xed\x89Mz\xae\x88\xfdx<\rx\xa7`%\x9c\xd3\x89"
-    WSGIServer((HOST, PORT), app.wsgi_app).serve_forever()
-    # app.run(host=HOST, port=PORT, debug=DEBUG_MODE)
+    app.run(host=HOST, port=PORT, debug=DEBUG_MODE)
