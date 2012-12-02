@@ -7,19 +7,32 @@
 <body>
     {% include "navbar.html" %}
     <div style="height:100px"></div>
-    <div id="login-container" class="container">
-        <h1>Login</h1>
-        <input id="login-username" type="text" placeholder="username"/> <br />
-        <input id="login-password" placeholder="password" type="password" /> <br />
-        <button id="js-ToSignup" class="btn btn-primary">Sign Up</button>
-        <button id="js-login" class="btn btn-info">Login</button>
-    </div>
-    <div id="signup-container" class="container hide">
-        <h1>Sign up</h1>
-        <input id="signup-username" type="text" placeholder="username"/> <br />
-        <input id="signup-email" placeholder="email" type="text" /> <br />
-        <input id="signup-password" placeholder="password" type="password" /> <br />
-        <button id="js-ToLogin" class="btn btn-primary">Back to login</button>
-        <button id="js-signup" class="btn btn-info">Sign Up</button>
+    <div class="row-fluid">
+        <div id="login-container" class="span6" style="text-align:right">
+            <div style="padding-bottom:25px;">
+                <img src="/static/img/logo.png" width="250px"><br>
+                Making living together fun once again!
+            </div>
+            <h1>Login</h1>
+            <input id="login-username" type="text" placeholder="username"/> <br />
+            <input id="login-password" placeholder="password" type="password" /> <br />
+            <button id="js-ToSignup" class="btn btn-primary">Sign Up</button>
+            <button id="js-login" class="btn btn-info">Login</button>
+        </div>
+        <div id="signup-container" class="span6 hide" style="text-align:right">
+            <div style="padding-bottom:25px;">
+                <img src="/static/img/logo.png" width="250px"><br>
+                Making living together fun once again!
+            </div>
+            <h1>Sign up</h1>
+            <input id="signup-username" type="text" placeholder="username"/> <br />
+            <input id="signup-email" placeholder="email" type="text" /> <br />
+            <input id="signup-password" placeholder="password" type="password" /> <br />
+            <button id="js-ToLogin" class="btn btn-primary">Back to login</button>
+            <button id="js-signup" class="btn btn-info">Sign Up</button>
+        </div>
+        <div class="span6">
+            <img src="/static/img/phone.png" height="596px">
+        </div>
     </div>
 </body>
