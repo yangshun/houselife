@@ -46,3 +46,16 @@ body {
 #ui {
     padding-top: 15px
 }
+
+table input, table select {
+    margin: 0;
+}
+
+table input {
+    width: 100%;
+}
+
+table select {
+    width: 80px;
+    height: 20px;
+}

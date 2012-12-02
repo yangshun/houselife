@@ -1,21 +1,25 @@
 
 $(function () {
+
+    $( "#tabs" ).tabs();
+
     TaskView = Backbone.View.extend({
         model: Task,
-        initialize: function () {
+        initialize: function (completed) {
             var thisView = this;
             if (this.model instanceof Task) {
                 if (this.model.get('status') < 1) {
-                    this.renderNormalView();
+                    this.renderNormalView(true,true,true);
                 }
             }
+
             this.model.on('change', function (model) {
                 if (model.get('status') == 1) {
                     thisView.$el.remove();
                 }
             });
         },
-        renderNormalView: function () {
+        renderNormalView: function (completeButton,editButton,deleteButton) {
 
             var thisView = this;
 
@@ -40,41 +44,42 @@ $(function () {
                 $assigneeEntry.html(user.get('username'));
             }
 
-            var $statusEntry = $('<td>');
-
-            var status = this.model.get('status') ? "Completed" : "Open";
-            $statusEntry.html(status);
-
             var $editEntry = $('<td>');
-            var $editButton = $('<i class="icon-pencil icon-gray pointer"></i>');
-            $editButton.click(function () {
-                thisView.renderEditView();
-            });
-            $editEntry.append($editButton);
+            if (editButton) {
+                var $editButton = $('<i class="icon-pencil icon-gray pointer"></i>');
+                $editButton.click(function () {
+                    thisView.renderEditView();
+                });
+                $editEntry.append($editButton);                
+            }
+
 
             var $completeEntry = $('<td>');
-            var $completeButton = $('<i class="icon-ok icon-gray pointer"></i>');
-            $completeButton.click(function () {
-                thisView.model.set('status',1);
-                thisView.model.save();
-            });
-            $completeEntry.append($completeButton);
 
+            if (completeButton) {
+                var $completeButton = $('<i class="icon-ok icon-gray pointer"></i>');
+                $completeButton.click(function () {
+                    thisView.model.set('status',1);
+                    thisView.model.save();
+                });
+                $completeEntry.append($completeButton);
+            }
 
             var $deleteEntry = $('<td>');
-            var $deleteButton = $('<i class="icon-remove icon-gray pointer"></i>');
-            $deleteButton.click(function () {
-                thisView.model.destroy({
-                    wait:true
+            if (deleteButton) {
+                var $deleteButton = $('<i class="icon-remove icon-gray pointer"></i>');
+                $deleteButton.click(function () {
+                    thisView.model.destroy({
+                        wait:true
+                    });
                 });
-            });
-            $deleteEntry.append($deleteButton);
+                $deleteEntry.append($deleteButton);
+            }
 
             $tableRow
                 .append($titleEntry)
                 .append($descriptionEntry)
                 .append($assigneeEntry)
-                .append($statusEntry)
                 .append($completeEntry)
                 .append($editEntry)
                 .append($deleteEntry);
@@ -136,22 +141,9 @@ $(function () {
                 })
                 .appendTo($assigneeEntry);
 
-            var $statusEntry = $('<td>');
-            if (create) {
-                $statusEntry.html("Open");
-            } else {
-                var $statusInput = $('<select><option value="0">Open</option><option value="1">Completed</option>');
-                $statusInput
-                    .val(this.model.get('status'))
-                    .on('change', function () {
-                        thisView.model.set('status', $(this).val());
-                    })
-                    .appendTo($statusEntry);
-            }
-
 
             var $saveEntry = $('<td>');
-            var $saveButton = $('<button class="btn">Save</button>');
+            var $saveButton = $('<i class="icon-file icon-gray pointer"></i>');
             $saveButton.click(function () {
                 thisView.renderNormalView();
                 thisView.model.save({
@@ -163,16 +155,17 @@ $(function () {
             $saveEntry.append($saveButton);
 
             var $deleteEntry = $('<td>');
-            var $deleteButton = $('<button class="btn">Delete</button>');
+            var $deleteButton = $('<i class="icon-remove icon-gray pointer"></i>');
             $deleteEntry.append($deleteButton);
 
+            var $emptyEntry = $('<td>');
             $tableRow
                 .append($titleEntry)
                 .append($descriptionEntry)
                 .append($assigneeEntry)
-                .append($statusEntry)
                 .append($saveEntry)
-                .append($deleteEntry);
+                .append($deleteEntry)
+                .append($emptyEntry);
 
             this.$el.replaceWith($tableRow);
             this.setElement($tableRow);
@@ -181,15 +174,29 @@ $(function () {
 
     });
 
+    CompletedTaskView = TaskView.extend({
+        initialize: function () {
+            var thisView = this;
+            if (this.model instanceof Task) {
+                if (this.model.get('status') == 1) {
+                    this.renderNormalView(false,false,false);
+                }
+            }
+        }
+    });
+
+    
+
     TaskCollectionView = Backbone.View.extend({
         collection: TaskCollection,
+        subView: TaskView,
         initialize: function () {
             var taskViews = this.taskViews = {};
 
             var thisCollectionView = this;
 
             var addView = function (model) {
-                newTaskView = new TaskView({
+                newTaskView = new thisCollectionView.subView({
                     'model': model
                 });
 
@@ -222,7 +229,7 @@ $(function () {
             var $tableRow = $('<tr>');
             $table.append($tableRow);
 
-            var headers = ["Title", "Description", "Assignee", "Status", " ", " ", " "];
+            var headers = ["Title", "Description", "Assignee", " ", " ", " "];
 
             for (var i = 0; i < headers.length; i++) {
                 $tableRow.append($('<th>'+headers[i]+'</th>'));
@@ -233,6 +240,12 @@ $(function () {
             
         }
     });
+
+    CompletedTaskCollectionView = TaskCollectionView.extend({
+        collection: TaskCollection,
+        subView: CompletedTaskView
+    });
+
 
     ModalEditView = Backbone.View.extend({
         el: $('#dialog-modal'),
