@@ -27,6 +27,12 @@
     
     // Override point for customization after application launch.
     
+    
+    [[UINavigationBar appearance] setTintColor: [UIColor colorWithRed:0.0f/255.0f
+                                                                green:114.0f/255.0f
+                                                                 blue:188.0f/255.0f
+                                                                alpha:1.000]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ParseStarterProjectViewController alloc] initWithNibName:@"ParseStarterProjectViewController" bundle:nil];

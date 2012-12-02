@@ -1,5 +1,9 @@
 #import "ParseStarterProjectViewController.h"
 #import <Parse/Parse.h>
+#import "FeedViewController.h"
+#import "DDMenuController.h"
+#import "ParseStarterProjectAppDelegate.h"
+#import "LeftController.h"
 
 #define kOFFSET_FOR_KEYBOARD 216.0
 
@@ -14,7 +18,20 @@
 
 
 - (IBAction)signin:(UIButton*)sender {
+
+    FeedViewController *mainController = [[FeedViewController alloc] init];
+    mainController.title = @"HouseLife";
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainController];
     
+    DDMenuController *rootController = [[DDMenuController alloc] initWithRootViewController:navController];
+    
+    ParseStarterProjectAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    delegate.menuController = rootController;
+    
+    LeftController *leftController = [[LeftController alloc] init];
+    rootController.leftViewController = leftController;
+    
+    [self presentViewController:rootController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
