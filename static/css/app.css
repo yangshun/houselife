@@ -34,3 +34,15 @@ img.thumb.selected{
     -webkit-box-shadow: 0 0 30px #111;
     box-shadow: 0px 0px 30px #111;
 }
+
+body {
+    font-family: "HelveticaNeue-Light";
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+#ui {
+    padding-top: 15px
+}

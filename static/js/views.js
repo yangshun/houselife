@@ -46,14 +46,14 @@ $(function () {
             $statusEntry.html(status);
 
             var $editEntry = $('<td>');
-            var $editButton = $('<button class="btn">Edit</button>');
+            var $editButton = $('<i class="icon-pencil icon-gray pointer"></i>');
             $editButton.click(function () {
                 thisView.renderEditView();
             });
             $editEntry.append($editButton);
 
             var $completeEntry = $('<td>');
-            var $completeButton = $('<button class="btn">Complete</button>');
+            var $completeButton = $('<i class="icon-ok icon-gray pointer"></i>');
             $completeButton.click(function () {
                 thisView.model.set('status',1);
                 thisView.model.save();
@@ -62,7 +62,7 @@ $(function () {
 
 
             var $deleteEntry = $('<td>');
-            var $deleteButton = $('<button class="btn">Delete</button>');
+            var $deleteButton = $('<i class="icon-remove icon-gray pointer"></i>');
             $deleteButton.click(function () {
                 thisView.model.destroy({
                     wait:true
@@ -218,11 +218,11 @@ $(function () {
             // Initialize this DOM element
 
             var $table = $('<table>');
-            $table.addClass('table');
+            $table.addClass('table table-striped');
             var $tableRow = $('<tr>');
             $table.append($tableRow);
 
-            var headers = ["Title", "Description", "Assignee", "Status", "Options"];
+            var headers = ["Title", "Description", "Assignee", "Status", " ", " ", " "];
 
             for (var i = 0; i < headers.length; i++) {
                 $tableRow.append($('<th>'+headers[i]+'</th>'));
@@ -235,10 +235,12 @@ $(function () {
     });
 
     ModalEditView = Backbone.View.extend({
-        el: $('#modal-dialog'),
+        el: $('#dialog-modal'),
         model: Task,
         initialize: function () {
+            var thisView = this;
             var thumbs = [];
+            var selected;
 
             appVars.household.each(function (user) {
                 var img = $('<img class="thumb" src="/static/img/thumb/'+user.get('username').toLowerCase()+'.png"/>');
@@ -250,6 +252,7 @@ $(function () {
                             img.removeClass('selected');
                         });
                         $(this).addClass('selected');
+                        selected = user;
 
                     });
             });
@@ -257,9 +260,14 @@ $(function () {
             $('#create-task-btn').click(function () {
                 var newTask = new Task({
                     "household_id": appVars.user.get('household_id'),
+                    "title": $('#dialog-title-input').val(),
+                    "description": $('#dialog-description-input').val(),
+                    "assignee_id": selected.get('objectId'),
+                    "status": 0
                 });
                 newTask.save();
                 taskCollection.add(newTask);
+                thisView.$el.dialog('close');
             });
         }
     });
