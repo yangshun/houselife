@@ -39,7 +39,7 @@ def household_tasks(household_id):
     
 @mod.route("/<household_id>/users", methods=["GET"])
 @login_required
-def household_tasks(household_id):
+def household_users(household_id):
     log.info("Getting users for household id %s."%household_id)
     if household_id in (None, "0"):
         jusers = {"code":requests.codes.ok,
