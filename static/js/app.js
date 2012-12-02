@@ -80,6 +80,10 @@ $(function () {
                 collection: taskCollection
             });
 
+            completedTaskCollectionView = new CompletedTaskCollectionView({
+                collection: taskCollection
+            });
+
             taskCollection.grab(function () {
                 $('#add-task-btn').click(function () {
                     $( "#dialog-modal" ).dialog({
@@ -87,16 +91,10 @@ $(function () {
                         width: 850,
                         modal: true
                     });
-                    /*
-                    var newTask = new Task({
-                        "household_id": appVars.user.get('household_id')
-                    });
-                    taskCollection.add(newTask);
-                    taskCollectionView.taskViews[newTask.cid].renderEditView(true);
-                    */
                 });
             }, false);
             $('#tasks-container').append(taskCollectionView.$el);
+            $('#completed-tasks-container').append(completedTaskCollectionView.$el);
 
 
         }
