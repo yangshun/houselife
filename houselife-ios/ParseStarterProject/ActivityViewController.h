@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityItemViewCell.h"
+#import "Parse/Parse.h"
 
-@interface ActivityViewController : UIViewController
+@interface ActivityViewController : PFQueryTableViewController
 
 @property (nonatomic, strong) IBOutlet ActivityItemViewCell *activityCell;
 

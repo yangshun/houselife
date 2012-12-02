@@ -61,7 +61,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 5;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,10 +98,6 @@
             cell.imageView.image = [UIImage imageNamed:@"icon-location"];
             break;
         case 4:
-            title = @"Expenses";
-            cell.imageView.image = [UIImage imageNamed:@"icon-expenses"];
-            break;
-        case 5:
             title = @"Profile";
             cell.imageView.image = [UIImage imageNamed:@"icon-profile"];
             break;
@@ -162,9 +158,6 @@
             controller = [[NearbyViewController alloc] init];
             break;
         case 4:
-            title = @"Expenses";
-            break;
-        case 5:
             title = @"Profile";
             controller = [[ProfileViewController alloc] init];
             break;
