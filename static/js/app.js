@@ -120,8 +120,6 @@ $(function () {
     var AnalyticsView = NavigationView.extend({
         el: $('#analytics-container'),
         initialize: function () {
-            console.log('lol');
-
             var thisView = this;
 
             if (google.visualization) {
