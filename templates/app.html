@@ -1,5 +1,5 @@
 <script>
-    var user = JSON.parse("{{ user }}");
+    alert('OMG');
 </script>
 <script src="/static/js/underscore.js"></script>
 <script src="/static/js/backbone.js"></script>
@@ -20,15 +20,18 @@
 
 <div class="container js-nav-container hide" id="profile-container">
     <h1>Profile</h1>
-    <div class="">
+    <div class="container">
+        Name: <input type="text" placeholder="Hendy Chua" /><br />
+        Email: <input type="text" placeholder="test@test.com" /><br />
+        Password: <input type="password" placeholder = "password" /><br />
+    </div>
 </div>
 
-<div class="container js-nav-container hide" id="feed-container">
-    <h1>Feed</h1>
-</div>
 
 <div class="container js-nav-container hide" id="analytics-container">
     <h1>Analytics</h1>
+    <div id="analytics-container" class="container">
+    </div>
 </div>
 
 <div class="container js-nav-container hide" id="expenses-container">
