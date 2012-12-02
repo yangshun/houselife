@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FeedItemViewCell.h"
+#import "Parse/Parse.h"
 
-@interface FeedViewController : UIViewController
+@interface FeedViewController : PFQueryTableViewController <UIActionSheetDelegate>
 @property (nonatomic, strong) IBOutlet FeedItemViewCell *feedCell;
 
 @end

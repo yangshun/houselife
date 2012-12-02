@@ -28,6 +28,21 @@
 		6372FF531613CC3C002132AF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372FF521613CC3C002132AF /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6372FF561613CC42002132AF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372FF551613CC42002132AF /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6372FF581613CC47002132AF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6372FF571613CC47002132AF /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6DABE5AB166B5A5800A757F2 /* ThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DABE5AA166B5A5800A757F2 /* ThumbnailManager.m */; };
+		6DABE5B1166B5AFD00A757F2 /* thumb-cy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5AD166B5AFD00A757F2 /* thumb-cy.png */; };
+		6DABE5B2166B5AFD00A757F2 /* thumb-wy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5AE166B5AFD00A757F2 /* thumb-wy.png */; };
+		6DABE5B3166B5AFD00A757F2 /* thumb-xl.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5AF166B5AFD00A757F2 /* thumb-xl.png */; };
+		6DABE5B4166B5AFD00A757F2 /* thumb-ys.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5B0166B5AFD00A757F2 /* thumb-ys.png */; };
+		6DABE5B8166B636500A757F2 /* AddFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DABE5B6166B636500A757F2 /* AddFeedViewController.m */; };
+		6DABE5B9166B636500A757F2 /* AddFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5B7166B636500A757F2 /* AddFeedViewController.xib */; };
+		6DABE5BB166B679500A757F2 /* thumb-hendy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5BA166B679500A757F2 /* thumb-hendy.png */; };
+		6DABE5BE166B69B300A757F2 /* icon-shuffle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5BC166B69B300A757F2 /* icon-shuffle.png */; };
+		6DABE5BF166B69B300A757F2 /* icon-lazy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5BD166B69B300A757F2 /* icon-lazy.png */; };
+		6DABE5C1166B6AB500A757F2 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5C0166B6AB500A757F2 /* arrow.png */; };
+		6DABE5C9166B89AB00A757F2 /* StatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DABE5C7166B89AA00A757F2 /* StatisticsViewController.m */; };
+		6DABE5CA166B89AB00A757F2 /* StatisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5C8166B89AB00A757F2 /* StatisticsViewController.xib */; };
+		6DABE5CC166B9EE900A757F2 /* black-linen@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5CB166B9EE700A757F2 /* black-linen@2X.png */; };
+		6DABE5CE166B9FB600A757F2 /* cross-scratches@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DABE5CD166B9FB600A757F2 /* cross-scratches@2X.png */; };
 		6DCC1A93166B1E8900F0C025 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCC1A91166B1E8800F0C025 /* ActivityViewController.m */; };
 		6DCC1A94166B1E8900F0C025 /* ActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCC1A92166B1E8900F0C025 /* ActivityViewController.xib */; };
 		6DCC1A98166B211600F0C025 /* ActivityItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCC1A96166B1ED300F0C025 /* ActivityItemViewCell.m */; };
@@ -92,6 +107,24 @@
 		6372FF521613CC3C002132AF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		6372FF551613CC42002132AF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6372FF571613CC47002132AF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		6DABE5A9166B5A5800A757F2 /* ThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailManager.h; sourceTree = "<group>"; };
+		6DABE5AA166B5A5800A757F2 /* ThumbnailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailManager.m; sourceTree = "<group>"; };
+		6DABE5AD166B5AFD00A757F2 /* thumb-cy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-cy.png"; sourceTree = "<group>"; };
+		6DABE5AE166B5AFD00A757F2 /* thumb-wy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-wy.png"; sourceTree = "<group>"; };
+		6DABE5AF166B5AFD00A757F2 /* thumb-xl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-xl.png"; sourceTree = "<group>"; };
+		6DABE5B0166B5AFD00A757F2 /* thumb-ys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-ys.png"; sourceTree = "<group>"; };
+		6DABE5B5166B636500A757F2 /* AddFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFeedViewController.h; sourceTree = "<group>"; };
+		6DABE5B6166B636500A757F2 /* AddFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFeedViewController.m; sourceTree = "<group>"; };
+		6DABE5B7166B636500A757F2 /* AddFeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFeedViewController.xib; sourceTree = "<group>"; };
+		6DABE5BA166B679500A757F2 /* thumb-hendy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-hendy.png"; sourceTree = "<group>"; };
+		6DABE5BC166B69B300A757F2 /* icon-shuffle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-shuffle.png"; sourceTree = "<group>"; };
+		6DABE5BD166B69B300A757F2 /* icon-lazy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-lazy.png"; sourceTree = "<group>"; };
+		6DABE5C0166B6AB500A757F2 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		6DABE5C6166B89A700A757F2 /* StatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsViewController.h; sourceTree = "<group>"; };
+		6DABE5C7166B89AA00A757F2 /* StatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsViewController.m; sourceTree = "<group>"; };
+		6DABE5C8166B89AB00A757F2 /* StatisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticsViewController.xib; sourceTree = "<group>"; };
+		6DABE5CB166B9EE700A757F2 /* black-linen@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black-linen@2X.png"; sourceTree = "<group>"; };
+		6DABE5CD166B9FB600A757F2 /* cross-scratches@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-scratches@2X.png"; sourceTree = "<group>"; };
 		6DCC1A8F166B1C8500F0C025 /* FeedItemViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedItemViewCell.h; sourceTree = "<group>"; };
 		6DCC1A90166B1E8800F0C025 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		6DCC1A91166B1E8800F0C025 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
@@ -214,6 +247,14 @@
 				6DCC1A8F166B1C8500F0C025 /* FeedItemViewCell.h */,
 				6DDBC45C166B171400C8B4D5 /* FeedItemViewCell.m */,
 				6DDBC459166B169C00C8B4D5 /* FeedItemViewCell.xib */,
+				6DABE5B5166B636500A757F2 /* AddFeedViewController.h */,
+				6DABE5B6166B636500A757F2 /* AddFeedViewController.m */,
+				6DABE5B7166B636500A757F2 /* AddFeedViewController.xib */,
+				6DABE5A9166B5A5800A757F2 /* ThumbnailManager.h */,
+				6DABE5AA166B5A5800A757F2 /* ThumbnailManager.m */,
+				6DABE5C6166B89A700A757F2 /* StatisticsViewController.h */,
+				6DABE5C7166B89AA00A757F2 /* StatisticsViewController.m */,
+				6DABE5C8166B89AB00A757F2 /* StatisticsViewController.xib */,
 				6DCC1A90166B1E8800F0C025 /* ActivityViewController.h */,
 				6DCC1A91166B1E8800F0C025 /* ActivityViewController.m */,
 				6DCC1A92166B1E8900F0C025 /* ActivityViewController.xib */,
@@ -256,6 +297,16 @@
 		6DDBC41D166AD91F00C8B4D5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6DABE5CD166B9FB600A757F2 /* cross-scratches@2X.png */,
+				6DABE5CB166B9EE700A757F2 /* black-linen@2X.png */,
+				6DABE5C0166B6AB500A757F2 /* arrow.png */,
+				6DABE5BC166B69B300A757F2 /* icon-shuffle.png */,
+				6DABE5BD166B69B300A757F2 /* icon-lazy.png */,
+				6DABE5BA166B679500A757F2 /* thumb-hendy.png */,
+				6DABE5AD166B5AFD00A757F2 /* thumb-cy.png */,
+				6DABE5AE166B5AFD00A757F2 /* thumb-wy.png */,
+				6DABE5AF166B5AFD00A757F2 /* thumb-xl.png */,
+				6DABE5B0166B5AFD00A757F2 /* thumb-ys.png */,
 				6DDBC450166B0BE200C8B4D5 /* profile-mockup.png */,
 				6DDBC44E166B085900C8B4D5 /* badge.png */,
 				6DDBC43E166AF22500C8B4D5 /* icon-activity.png */,
@@ -357,6 +408,18 @@
 				6DDBC456166B0C3900C8B4D5 /* ProfileViewController.xib in Resources */,
 				6DDBC45A166B169C00C8B4D5 /* FeedItemViewCell.xib in Resources */,
 				6DCC1A94166B1E8900F0C025 /* ActivityViewController.xib in Resources */,
+				6DABE5B1166B5AFD00A757F2 /* thumb-cy.png in Resources */,
+				6DABE5B2166B5AFD00A757F2 /* thumb-wy.png in Resources */,
+				6DABE5B3166B5AFD00A757F2 /* thumb-xl.png in Resources */,
+				6DABE5B4166B5AFD00A757F2 /* thumb-ys.png in Resources */,
+				6DABE5B9166B636500A757F2 /* AddFeedViewController.xib in Resources */,
+				6DABE5BB166B679500A757F2 /* thumb-hendy.png in Resources */,
+				6DABE5BE166B69B300A757F2 /* icon-shuffle.png in Resources */,
+				6DABE5BF166B69B300A757F2 /* icon-lazy.png in Resources */,
+				6DABE5C1166B6AB500A757F2 /* arrow.png in Resources */,
+				6DABE5CA166B89AB00A757F2 /* StatisticsViewController.xib in Resources */,
+				6DABE5CC166B9EE900A757F2 /* black-linen@2X.png in Resources */,
+				6DABE5CE166B9FB600A757F2 /* cross-scratches@2X.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +440,9 @@
 				6DDBC455166B0C3900C8B4D5 /* ProfileViewController.m in Sources */,
 				6DDBC45D166B171400C8B4D5 /* FeedItemViewCell.m in Sources */,
 				6DCC1A93166B1E8900F0C025 /* ActivityViewController.m in Sources */,
+				6DABE5AB166B5A5800A757F2 /* ThumbnailManager.m in Sources */,
+				6DABE5B8166B636500A757F2 /* AddFeedViewController.m in Sources */,
+				6DABE5C9166B89AB00A757F2 /* StatisticsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,4 +13,8 @@
 
 @property (strong, nonatomic) DDMenuController *menuController;
 
+@property (strong, nonatomic) NSArray *allUsers;
+
+- (void)loadAllUsers;
+
 @end

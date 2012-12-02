@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileViewController.h"
 #import "ActivityViewController.h"
+#import "StatisticsViewController.h"
 
 @implementation LeftController
 
@@ -80,7 +81,7 @@
     NSString *title;
     switch (indexPath.row) {
         case 0:
-            title = @"HouseLife";
+            title = @"Tasks";
             cell.imageView.image = [UIImage imageNamed:@"icon-tasks"];
             break;
         case 1:
@@ -153,6 +154,7 @@
             break;
         case 2:
             title = @"Statistics";
+            controller = [[StatisticsViewController alloc] init];
             break;
         case 3:
             title = @"Nearby";
