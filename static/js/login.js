@@ -4,7 +4,7 @@ function showErrorMessage(msg) {
 
 $(function () {
     $('#js-login').click(function () {
-        $.post('/user/login', {
+        $.get('/user/login', {
             'username': $('#login-username').val(),
             'password': $('#login-password').val()
         }, function(res) {
