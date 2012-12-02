@@ -8,13 +8,17 @@ $(function () {
             'username': $('#login-username').val(),
             'password': $('#login-password').val()
         }, function(res) {
-            //TODO: change when endpoint is defined
-            var success = true;
-
+            if (typeof(res) == 'string') {
+                res = JSON.parse(res);
+            }
+            var success;
+            if (res.code && res.code == 200) {
+                success = true;
+            }
             if (success) {
                 window.location.href = "/dashboard";
             } else {
-                showErrorMessage(res);
+                showErrorMessage(res.message);
             }
         });
     });

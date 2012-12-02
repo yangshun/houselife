@@ -1,6 +1,10 @@
+<script src="https://www.google.com/jsapi"></script>
 <script>
-    var user = JSON.parse("{{ user }}");
+    google.load("visualization", "1", {packages:["corechart"]});
+    
+    user = JSON.parse('{{user|safe}}');
 </script>
+<script src="/static/js/jq-ui.js"></script>
 <script src="/static/js/underscore.js"></script>
 <script src="/static/js/backbone.js"></script>
 <script src="/static/js/models.js"></script>
@@ -9,28 +13,48 @@
 
 
 <div class="container js-nav-container" id="todo-container">
-    <h1>Todos</h1>
-    <div id="ui">
-        <button style="float:right" class="btn" id="add-task-btn">Add Task</button>
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#incomplete-tasks">Incomplete</a></li>
+            <li><a href="#complete-tasks">Complete</a></li>
+        </ul>
+        <div id="incomplete-tasks">
+            <h3 style="float:left">Incomplete tasks</h3>
+            <div id="ui">
+                <button style="float:right" class="btn btn-primary" id="add-task-btn">Add Task</button>
+            </div>
+            <div id="tasks-container" style="clear:both">
+
+            </div>
+        </div>
+        <div id="complete-tasks">
+            <h3 style="float:left">Completed tasks</h3>
+            <div id="completed-tasks-container" style="clear:both">
+
+            </div>
+        </div>
     </div>
-    <div id="tasks-container">
 
-    </div>
-</div>
-
-<div class="container js-nav-container hide" id="profile-container">
-    <h1>Profile</h1>
-    <div class="">
-</div>
-
-<div class="container js-nav-container hide" id="feed-container">
-    <h1>Feed</h1>
 </div>
 
 <div class="container js-nav-container hide" id="analytics-container">
     <h1>Analytics</h1>
+    <div id="analytics-container" class="container">
+    </div>
 </div>
 
 <div class="container js-nav-container hide" id="expenses-container">
     <h1>Expenses</h1>
 </div>
+
+
+<div id="dialog-modal" class="hide" title="New Task">
+    Title: <input id="dialog-title-input" type="text" placeholder="Title"></input><br />
+    Description: <input id="dialog-description-input" type="text" placeholder="Description" style="height:100px; width: 600px"></input><br />
+    Assignee: <div id="new-task-assignees"></div>
+    <div style="clear:both; float:right">
+        <button id="create-task-btn" class="btn">Create Task</button>
+    </div>
+</div>
+

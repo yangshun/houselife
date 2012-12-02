@@ -3,7 +3,7 @@ import logging
 import os
 
 from flask import request, Blueprint, g, redirect, url_for, abort,\
-                    render_template
+                    render_template, Response
 import requests
 
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 mod = Blueprint('user', __name__)
 
-@mod.route("/create", methods=["POST"])
+@mod.route("", methods=["POST"])
 def create():
     log.info("Attempting to create new user.")
     log.debug("Info submitted by user: %s"%request.form)
@@ -52,7 +52,7 @@ def login():
         res = {"code":requests.codes.ok}
         set_session_key(r.json["objectId"])
     
-    return json.dumps(res)
+    return Response(json.dumps(res), mimetype="application/json")
     
 @mod.route("/logout")
 def logout():

@@ -2,15 +2,11 @@ $(function () {
 
     appVars = {};
 
-    user = {
-        id: 123
-    };
     var App = Backbone.Router.extend({
         initialize: function () {
 
             var views = this.views = {
                 'todo': new TodoView(),
-                'profile': new ProfileView(),
                 'feed': new FeedView(),
                 'analytics': new AnalyticsView(),
                 'expenses': new ExpensesView()
@@ -29,19 +25,9 @@ $(function () {
                 thisApp.navigate('dashboard/todo', {trigger:true});
             });
 
-            $('#nav-profile').click(function (e) {
-                e.preventDefault();
-                thisApp.navigate('dashboard/profile', {trigger:true});
-            });
-
-            $('#nav-feed').click(function (e) {
-                e.preventDefault();
-                thisApp.navigate('dashboard/feed', {trigger:true});
-            });
-
             $('#nav-analytics').click(function (e) {
                 e.preventDefault();
-                thisApp.navigate('dashboard/profile', {trigger:true});
+                thisApp.navigate('dashboard/analytics', {trigger:true});
             });
 
             $('#nav-expenses').click(function(e) {
@@ -87,26 +73,25 @@ $(function () {
                 collection: taskCollection
             });
 
+            completedTaskCollectionView = new CompletedTaskCollectionView({
+                collection: taskCollection
+            });
+
             taskCollection.grab(function () {
-                    $('#add-task-btn').click(function () {
-                    var newTask = new Task();
-                    taskCollection.add(newTask);
-                    taskCollectionView.taskViews[newTask.cid].renderEditView();
+                $('#add-task-btn').click(function () {
+                    $( "#dialog-modal" ).dialog({
+                        height: 440,
+                        width: 850,
+                        modal: true
+                    });
                 });
-            }, true);
-
+            }, false);
             $('#tasks-container').append(taskCollectionView.$el);
+            $('#completed-tasks-container').append(completedTaskCollectionView.$el);
 
 
         }
 
-    });
-
-    var ProfileView = NavigationView.extend({
-        el: $('#profile-container'),
-        initialize: function () {
-
-        }
     });
 
     var FeedView = NavigationView.extend({
@@ -119,7 +104,35 @@ $(function () {
     var AnalyticsView = NavigationView.extend({
         el: $('#analytics-container'),
         initialize: function () {
+            var thisView = this;
 
+            if (google.visualization) {
+                drawChart();
+            } else {
+                google.setOnLoadCallback(drawChart);
+            }
+            function drawChart() {
+                var dataArray = [];
+                dataArray.push(['User', 'Tasks Completed']);
+                for (var i = 0; i < taskCollection.length; i++) {
+                    
+                }
+
+                var data = google.visualization.arrayToDataTable([
+                  ['Task', 'Hours per Day'],
+                  ['Work',     11],
+                  ['Eat',      2],
+                  ['Commute',  2],
+                  ['Watch TV', 2],
+                  ['Sleep',    7]
+                ]);
+
+                var options = {
+                  title: 'My Daily Activities'
+                };
+                var chart = new google.visualization.PieChart(thisView.el);
+                chart.draw(data, options);
+            }
         }
     });
 
@@ -130,12 +143,15 @@ $(function () {
         }
     });
 
-    appVars.household = new Household();
+    appVars.user = new User(user);
+    appVars.household = new Household(appVars.user.get('household_id'));
     appVars.household.grab(function () {
         app = new App({});
         Backbone.history.start({pushState:true});
 
-    }, true);
+        new ModalEditView();
+
+    }, false);
 
     appVars.user = new User();
     appVars.user.set(user);

@@ -8,8 +8,9 @@ $(function () {
 
     Household = Backbone.Collection.extend({
         model: User,
-        initialize: function () {
-            this.url = 'user/'+user.id+'/household';
+        initialize: function (household_id) {
+            this.url = '/household/'+household_id+'/users';
+            this.id = household_id;
         },
         grab: function (cb, test) {
             if (test) {
@@ -18,13 +19,35 @@ $(function () {
                 }
                 cb();
             } else {
-                this.fetch();
+                this.fetch({
+                    success: function () {
+                        cb();
+                    }
+                });
             }
+        },
+        parse: function (response) {
+            return response;
         }
     });
 
     Task = Backbone.Model.extend({
-        url: '/task/'
+        url: '/task/',
+        initialize: function () {
+            var taskModel = this;
+            var objectId = this.get('objectId') ? this.get('objectId') : "";
+            this.url = '/task/'+objectId;
+            this.on('change', function (attr) {
+                var objectId = this.get('objectId') ? this.get('objectId') : "";
+                this.url = '/task/'+objectId;
+            });
+        },
+        complete: function (cb) {
+            this.set('status', 1);
+            this.save({
+                success: cb
+            });
+        }
     });
 
     Payment = Backbone.Model.extend({
@@ -37,7 +60,7 @@ $(function () {
     TaskCollection = Backbone.Collection.extend({
         model: Task,
         initialize: function() {
-            this.url = '/user/'+user.id+'/tasks';
+            this.url = '/household/'+appVars.household.id+'/tasks';
         },
         grab: function (cb, test) {
             if (test) {
@@ -46,7 +69,11 @@ $(function () {
                 }
                 cb();
             } else {
-                this.fetch();
+                this.fetch({
+                    success: function () {
+                        cb();
+                    }
+                });
             }
         }
     });
@@ -54,6 +81,7 @@ $(function () {
 
 function getTaskStub(i) {
     var newTask = new Task();
+    newTask.id = i;
     newTask.set('id', i);
     newTask.set('household_id', 1);
     newTask.set('description', 'haha');
@@ -66,6 +94,7 @@ function getTaskStub(i) {
 
 function getUserStub(i) {
     var newUser = new User();
+    newUser.id = i;
     newUser.set('id', i);
     newUser.set('email', 'lol@lol.com');
     newUser.set('password', 'qwerty');
