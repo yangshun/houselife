@@ -3,7 +3,7 @@ import logging
 import os
 
 from flask import request, Blueprint, g, redirect, url_for, abort,\
-                    render_template, jsonify
+                    render_template, Response
 import requests
 
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
@@ -39,7 +39,7 @@ def household_tasks(household_id):
                     log.debug(task)
                     task["status"] = TASK_STATUS_OPEN
     
-    return jsonify(jtasks)
+    return Response(json.dumps(jtasks), mimetype="application/json")
     
 @mod.route("/<household_id>/users", methods=["GET"])
 @login_required
@@ -63,4 +63,4 @@ def household_users(household_id):
             jusers = r.json["results"]
             log.debug(jusers)
 
-    return jsonify(jusers)
+    return Response(json.dumps(jusers), mimetype="application/json")

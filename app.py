@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-from flask import jsonify, Flask, request, redirect, url_for, g, abort,\
-                    session, render_template
+from flask import Flask, request, redirect, url_for, g, abort,\
+                    session, render_template, Response
 import requests
 
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
@@ -47,7 +47,7 @@ def dashboard():
     juser = r.json
     if not "household_id" in juser or not juser["household_id"]:
         juser["household_id"] = 0
-    user = jsonify(juser)
+    user = json.dumps(juser)
     return render_template('main.html', user=user)  
 
 def attach_blueprints_to_app():

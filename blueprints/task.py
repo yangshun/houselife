@@ -3,7 +3,7 @@ import logging
 import os
 
 from flask import request, Blueprint, g, redirect, url_for, abort,\
-                    render_template, jsonify
+                    render_template, Response
 import requests
 
 from blueprints import PARSE_BASE_API, PARSE_HEADERS
@@ -29,7 +29,7 @@ def create():
     if not household_id:
         res = {"code":requests.codes.bad_request,
                "message":"No household ID."}
-        return jsonify(res)
+        return Response(json.dumps(res), mimetype="application/json")
 
     url = os.path.join(PARSE_BASE_API, "classes/task")
     
@@ -45,7 +45,7 @@ def create():
         jtask = r.json
         log.debug(json.dumps(jtask))
         
-    return jsonify(jtask)
+    return Response(json.dumps(jtask), mimetype="application/json")
     
 @mod.route("/<task_id>s/delete", methods=["POST"])
 @login_required
@@ -54,7 +54,7 @@ def delete(task_id):
     if not task_id:
         res = {"code":requests.codes.bad_request,
                "message":"No task ID."}
-        return jsonify(res)
+        return Response(json.dumps(res), mimetype="application/json")
 
     url = os.path.join(PARSE_BASE_API, "classes/task", task_id)
 
@@ -68,7 +68,7 @@ def delete(task_id):
         log.info("Task deleted successfully.")
         res = {"code":r.status_code, "message": "Task deleted successfully."}
     
-    return jsonify(res)
+    return Response(json.dumps(res), mimetype="application/json")
 
 @mod.route("/<task_id>", methods=["POST"])
 @login_required
@@ -77,7 +77,7 @@ def edit(task_id):
     if not task_id:
         res = {"code":requests.codes.bad_request,
                "message":"No task ID."}
-        return jsonify(res)
+        return Response(json.dumps(res), mimetype="application/json")
     
     description = request.form.get("description", "")
     title = request.form.get("title", "")
@@ -101,4 +101,4 @@ def edit(task_id):
         res = {"code":r.status_code,
                "message":"Task %s edited successfully."%title}
     
-    return jsonify(res)
+    return Response(json.dumps(res), mimetype="application/json")
